@@ -37,9 +37,9 @@ func HelloWorld(w http.ResponseWriter, r *http.Request) {
 	//}
 
 	// Call Benchmarking Function
-	//benchmark("Image Processing", w)
+	benchmark("Image Processing", w)
 
-	ListFiles(w,r)
+	//ListFiles(w,r)
 }
 func ListFiles(w http.ResponseWriter, r *http.Request) {
 	files, err := ioutil.ReadDir("./serverless_function_source_code")
