@@ -87,8 +87,8 @@ func benchmark(funcName string, w http.ResponseWriter) {
 }
 
 func imageProcessing() image.Image {
-	//file, err := os.Open("image.jpg")
-	var file, err = os.OpenFile("image.jpg",os.O_RDWR,0644)
+	file, err := os.Open("./image.jpg")
+	//var file, err = os.OpenFile("image.jpg",os.O_RDWR,0644)
 	if err != nil {
 		log.Fatal(err)
 	}
