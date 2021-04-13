@@ -1,12 +1,10 @@
 package p
 
 import (
-	"encoding/json"
 	"fmt"
 	"github.com/nfnt/resize"
 	"image"
 	"image/jpeg"
-	"io"
 	"log"
 	"net/http"
 	"os"
@@ -16,26 +14,26 @@ import (
 // HelloWorld prints the JSON encoded "message" field in the body
 // of the request or "Hello, World!" if there isn't one.
 func HelloWorld(w http.ResponseWriter, r *http.Request) {
-	var d struct {
-		Message string `json:"message"`
-	}
-
-	if err := json.NewDecoder(r.Body).Decode(&d); err != nil {
-		switch err {
-		case io.EOF:
-			_, _ = fmt.Fprint(w, "Enter a number")
-			return
-		default:
-			log.Printf("json.NewDecoder: %v", err)
-			http.Error(w, http.StatusText(http.StatusBadRequest), http.StatusBadRequest)
-			return
-		}
-	}
-
-	if d.Message == "" {
-		_, _ = fmt.Fprint(w, "Error Occurred ")
-		return
-	}
+	//var d struct {
+	//	Message string `json:"message"`
+	//}
+	//
+	//if err := json.NewDecoder(r.Body).Decode(&d); err != nil {
+	//	switch err {
+	//	case io.EOF:
+	//		_, _ = fmt.Fprint(w, "Enter a number")
+	//		return
+	//	default:
+	//		log.Printf("json.NewDecoder: %v", err)
+	//		http.Error(w, http.StatusText(http.StatusBadRequest), http.StatusBadRequest)
+	//		return
+	//	}
+	//}
+	//
+	//if d.Message == "" {
+	//	_, _ = fmt.Fprint(w, "Error Occurred ")
+	//	return
+	//}
 
 	// Call Benchmarking Function
 	benchmark("Image Processing", w)
