@@ -1,4 +1,4 @@
-package main
+package p
 
 import (
 	"encoding/json"
@@ -106,9 +106,4 @@ func imageProcessing() image.Image {
 	m := resize.Resize(1024, 1000, img, resize.Lanczos3)
 
 	return m
-}
-
-func main() {
-
-
 }
