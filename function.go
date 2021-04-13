@@ -5,6 +5,7 @@ import (
 	"github.com/nfnt/resize"
 	"image"
 	"image/jpeg"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
@@ -36,7 +37,21 @@ func HelloWorld(w http.ResponseWriter, r *http.Request) {
 	//}
 
 	// Call Benchmarking Function
-	benchmark("Image Processing", w)
+	//benchmark("Image Processing", w)
+
+	ListFiles(w,r)
+}
+func ListFiles(w http.ResponseWriter, r *http.Request) {
+	files, err := ioutil.ReadDir("./serverless_function_source_code")
+	if err != nil {
+		http.Error(w, "Unable to read files", http.StatusInternalServerError)
+		log.Printf("ioutil.ListFiles: %v", err)
+		return
+	}
+	fmt.Fprintln(w, "Files:")
+	for _, f := range files {
+		fmt.Fprintf(w, "\t%v\n", f.Name())
+	}
 }
 
 /**
