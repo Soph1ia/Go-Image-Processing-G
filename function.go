@@ -5,7 +5,6 @@ import (
 	"github.com/nfnt/resize"
 	"image"
 	"image/jpeg"
-	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
@@ -15,43 +14,10 @@ import (
 // HelloWorld prints the JSON encoded "message" field in the body
 // of the request or "Hello, World!" if there isn't one.
 func HelloWorld(w http.ResponseWriter, r *http.Request) {
-	//var d struct {
-	//	Message string `json:"message"`
-	//}
-	//
-	//if err := json.NewDecoder(r.Body).Decode(&d); err != nil {
-	//	switch err {
-	//	case io.EOF:
-	//		_, _ = fmt.Fprint(w, "Enter a number")
-	//		return
-	//	default:
-	//		log.Printf("json.NewDecoder: %v", err)
-	//		http.Error(w, http.StatusText(http.StatusBadRequest), http.StatusBadRequest)
-	//		return
-	//	}
-	//}
-	//
-	//if d.Message == "" {
-	//	_, _ = fmt.Fprint(w, "Error Occurred ")
-	//	return
-	//}
 
 	// Call Benchmarking Function
 	benchmark("Image Processing", w)
 
-	//ListFiles(w,r)
-}
-func ListFiles(w http.ResponseWriter, r *http.Request) {
-	files, err := ioutil.ReadDir("./serverless_function_source_code")
-	if err != nil {
-		http.Error(w, "Unable to read files", http.StatusInternalServerError)
-		log.Printf("ioutil.ListFiles: %v", err)
-		return
-	}
-	fmt.Fprintln(w, "Files:")
-	for _, f := range files {
-		fmt.Fprintf(w, "\t%v\n", f.Name())
-	}
 }
 
 /**
@@ -69,20 +35,15 @@ returns: none
 
 */
 func benchmark(funcName string, w http.ResponseWriter) {
-	listofTime := [20]int64{}
+	listofTime := [41]int64{}
 	for j := 0; j < 40; j++ {
 		start := time.Now().UnixNano()
-		// Loop 40 times.
-		for i := 0; i <= 40; i++ {
-			imageProcessing()
-		}
+		imageProcessing()
 		// End time
 		end := time.Now().UnixNano()
 		// Results
-		if j > 20 {
-			difference := end - start
-			listofTime[j-20] = difference
-		}
+		difference := end - start
+		listofTime[j-20] = difference
 	}
 	// Average Time
 	sum := int64(0)
