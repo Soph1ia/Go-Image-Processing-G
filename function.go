@@ -43,7 +43,7 @@ func benchmark(funcName string, w http.ResponseWriter) {
 		end := time.Now().UnixNano()
 		// Results
 		difference := end - start
-		listofTime[j-20] = difference
+		listofTime[j] = difference
 	}
 	// Average Time
 	sum := int64(0)
